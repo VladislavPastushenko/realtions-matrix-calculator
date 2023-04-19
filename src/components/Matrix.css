@@ -1,0 +1,24 @@
+.cell {
+    text-align: center;
+    min-width: 3em;
+    padding: .5em .1em;
+}
+
+.input-cell {
+    outline: none;
+    border: none;
+    background: none;
+    width: 3em;
+    text-align: center;
+    font-size: inherit;
+}
+
+.input-cell::-webkit-outer-spin-button,
+.input-cell::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-cell[type=number] {
+    -moz-appearance: textfield;
+  }
