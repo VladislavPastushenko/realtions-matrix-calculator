@@ -3,20 +3,19 @@ import "./Matrix.css"
 
 const LETTERS = ["a", "b", "c", "d", "e", "f"]
 
-function Matrix({size, values, onChange=(() => {})}) {
+function Matrix({size, values, onChange=(() => {}), degree},) {
 
   const ths = []
   for (let i = 0; i < size; i++) {
     ths.push(<th key={"th" + i} className="cell">{LETTERS[i]}</th>)
   }
 
-
   return (
     <div>
         <table>
             <thead>
                 <tr>
-                <th></th>
+                <th>R{!!degree && `^${degree}`}</th>
                 {ths}
                 </tr>
             </thead>

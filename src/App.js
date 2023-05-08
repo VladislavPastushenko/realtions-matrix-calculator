@@ -105,7 +105,7 @@ function App() {
           {stepsValues.map((stepMatrix, idx) => (
             <div key={"step" + idx}>
               <div className="step-header">Krok: {idx}</div>
-              <Matrix size={size} values={stepMatrix}/>
+              <Matrix size={size} values={stepMatrix} degree={idx}/>
             </div>
           ))}
         </div>
