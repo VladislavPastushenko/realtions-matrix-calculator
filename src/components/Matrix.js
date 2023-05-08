@@ -3,13 +3,12 @@ import "./Matrix.css"
 
 const LETTERS = ["a", "b", "c", "d", "e", "f"]
 
-function Matrix({size, values, onChange=(() => {}), degree},) {
+function Matrix({size, values, onChange=(() => {}), degree, _key="key"}) {
 
   const ths = []
   for (let i = 0; i < size; i++) {
-    ths.push(<th key={"th" + i} className="cell">{LETTERS[i]}</th>)
+    ths.push(<th key={"th" + i + _key} className="cell">{LETTERS[i]}</th>)
   }
-
   return (
     <div>
         <table>
@@ -21,7 +20,7 @@ function Matrix({size, values, onChange=(() => {}), degree},) {
             </thead>
             <tbody>
                 {values.map((row, rowNumber) => (
-                    <tr key={"row" + rowNumber}>
+                    <tr key={"row" + rowNumber + _key}>
                         <th className="cell">{LETTERS[rowNumber]}</th>
                         {row.map((el, columnNumber) => {
                             const errorFlagClass = el > 1 || el < 0
@@ -29,7 +28,7 @@ function Matrix({size, values, onChange=(() => {}), degree},) {
                             : ""
                             return (
                                 <td
-                                    key={"col" + rowNumber + " " + columnNumber}
+                                    key={"col" + rowNumber + " " + columnNumber + _key}
                                     className={"cell"}
                                 >
                                     <input

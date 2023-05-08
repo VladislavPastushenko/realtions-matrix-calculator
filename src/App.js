@@ -8,10 +8,7 @@ const SIZE_OPTIONS = [2, 3, 4, 5, 6]
 
 function App() {
   const [size, setSize] = useState(3)
- // const [valuesToCount, setValuesToCount] = useState([[0.9, 0.3, 0.6], 
-                                              //        [0.3, 0.7, 0.5],
-                                                //      [0.6, 0.5, 0.8]])
-  const [valuesToCount, setValuesToCount] = useState ([[1, 0.5, 0.7], 
+  const [valuesToCount, setValuesToCount] = useState ([[1, 0.5, 0.7],
                                                        [0.5, 0.5, 0.1],
                                                        [0.7, 0.1, 0.8]])
   const [stepsValues, setStepValues] = useState([])
@@ -51,6 +48,7 @@ function App() {
   }
 
   const startCalculation = () => {
+    console.log("start")
     setError(false)
     const errorFlag = valuesToCount.find((row =>
       -1 !== row.findIndex(col => col > 1 || col < 0 || col === "")
@@ -68,45 +66,48 @@ function App() {
     setResult(resultData.result)
     setIsCalculated(true)
   }
+  useEffect(() => {
+    console.log('resultValues', resultValues)
+  }, [resultValues])
 
   return (
     <div>
       <h1>
         Tranzitivní uzávěr
       </h1>
-      <div>
-        <p className="label">
-          <label>
-            Zadejte velikost relace:
-          </label>
-          <select
-            className="select"
-            onChange={e => {changeSize(e.currentTarget.value)}}
-            value={size}
-          >
-            {SIZE_OPTIONS.map(el => (
-              <option value={el} key={"sizeOption" + el}> {el}x{el} </option>
-            ))}
-          </select>
-          <label>
-                Vyberte t-normu:
-          </label>
-          <select
-            className="select"
-          >
-          <option value="en">Minimova</option>
-          <option value="es">Soucinova</option>
-          <option value="pt">Lukasiewiczova</option>
-          <option value="pt">Drasticky soucin </option>
-          </select>
-        </p>
+      <div className="select-container">
+        <label>
+          Zadejte velikost relace:
+        </label>
+        <select
+          className="select"
+          onChange={e => {changeSize(e.currentTarget.value)}}
+          value={size}
+        >
+          {SIZE_OPTIONS.map(el => (
+            <option value={el} key={"sizeOption" + el}> {el}x{el} </option>
+          ))}
+        </select>
+      </div>
+      <div className="select-container">
+        <label>
+              Vyberte t-normu:
+        </label>
+        <select
+          className="select"
+        >
+        <option value="en">Minimova</option>
+        <option value="es">Soucinova</option>
+        <option value="pt">Lukasiewiczova</option>
+        <option value="pt">Drasticky soucin </option>
+        </select>
       </div>
 
       <div>
-        <Matrix size={size} values={valuesToCount} onChange={onChangeValueToCount}/>
+        <Matrix size={size} values={valuesToCount} onChange={onChangeValueToCount} _key="initial"/>
       </div>
       <div style={{marginTop: "1em"}}>
-        <button className="button" onClick={startCalculation}>
+        <button className="button" onClick={() => {startCalculation()}}>
           Spočítat
         </button>
       </div>
@@ -121,14 +122,14 @@ function App() {
           {stepsValues.map((stepMatrix, idx) => (
             <div key={"step" + idx}>
               <div className="step-header">Krok: {idx}</div>
-              <Matrix size={size} values={stepMatrix} degree={idx}/>
+              <Matrix size={size} values={stepMatrix} degree={idx} _key="step"/>
             </div>
           ))}
         </div>
         <p>Výsledek:</p>
-          <div>
-            <Matrix size={size} values={resultValues}/>
-          </div>
+        <div>
+          <Matrix size={size} values={resultValues} _key="results"/>
+        </div>
 
         <p> Tranzitivní uzávěr:
           {result
