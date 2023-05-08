@@ -7,8 +7,13 @@ const SIZE_OPTIONS = [2, 3, 4, 5, 6]
 
 
 function App() {
-  const [size, setSize] = useState(2)
-  const [valuesToCount, setValuesToCount] = useState([[0.2, 0.2], [0.2, 0.2]])
+  const [size, setSize] = useState(3)
+ // const [valuesToCount, setValuesToCount] = useState([[0.9, 0.3, 0.6], 
+                                              //        [0.3, 0.7, 0.5],
+                                                //      [0.6, 0.5, 0.8]])
+  const [valuesToCount, setValuesToCount] = useState ([[1, 0.5, 0.7], 
+                                                       [0.5, 0.5, 0.1],
+                                                       [0.7, 0.1, 0.8]])
   const [stepsValues, setStepValues] = useState([])
   const [resultValues, setResultValues] = useState([])
   const [result, setResult] = useState(false)
@@ -83,6 +88,17 @@ function App() {
               <option value={el} key={"sizeOption" + el}> {el}x{el} </option>
             ))}
           </select>
+          <label>
+                Vyberte t-normu:
+          </label>
+          <select
+            className="select"
+          >
+          <option value="en">Minimova</option>
+          <option value="es">Soucinova</option>
+          <option value="pt">Lukasiewiczova</option>
+          <option value="pt">Drasticky soucin </option>
+          </select>
         </p>
       </div>
 
@@ -94,7 +110,7 @@ function App() {
           Spočítat
         </button>
       </div>
-      {error && <div className="error-message"> Zadejte spravne hodntoy </div>}
+      {error && <div className="error-message"> Zadejte spravne hodnoty </div>}
 
       {isCalculated &&
       <div className="calculation-container">
