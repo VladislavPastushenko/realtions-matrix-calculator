@@ -79,7 +79,6 @@ function App() {
   }
 
   const startCalculation = () => {
-    console.log("start")
     setError(false)
     const errorFlag = valuesToCount.find((row =>
       -1 !== row.findIndex(col => col > 1 || col < 0 || col === "")
@@ -125,15 +124,13 @@ function App() {
           className="select"
           onChange={e => {setMethodOfCalculation(e.currentTarget.value)}}
           value={methodOfCalculation}
+          title={TIP_TEXT[methodOfCalculation]}
         >
         <option value={METHOD_OF_CALCULATION.MIN_T_NORM}>Minimova</option>
         <option value={METHOD_OF_CALCULATION.MULTIPLYING_T_NORM}>Soucinova</option>
         <option value={METHOD_OF_CALCULATION.LUKASIEWICZ_T_NORM}>Lukasiewiczova</option>
         <option value={METHOD_OF_CALCULATION.DRASTICKY_T_NORM}>Drasticky soucin </option>
         </select>
-        <p className="method-of-calculation-tip-text">
-          {TIP_TEXT[methodOfCalculation]}
-        </p>
       </div>
 
       <div>
