@@ -6,7 +6,30 @@ import PaginationMatrix from "./components/PaginationMatrix";
 import { METHOD_OF_CALCULATION } from "./utils/CalculateMatrix";
 
 const SIZE_OPTIONS = [2, 3, 4, 5, 6]
-
+const TIP_TEXT = {
+  [METHOD_OF_CALCULATION.MIN_T_NORM]: `MIN_T_NORM Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+  molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+  numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+  optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+  obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+  nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
+  tenetur error, harum nesciunt ipsum debitis quas aliquid.`,
+  [METHOD_OF_CALCULATION.MULTIPLYING_T_NORM]: `Multiplying Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+  molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+  numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+  optio, eaque rerum!`,
+  [METHOD_OF_CALCULATION.LUKASIEWICZ_T_NORM]: `Luka Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+  molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+  numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+  optio, eaque rerum! Provident similique accusantium nemo autem.`,
+  [METHOD_OF_CALCULATION.DRASTICKY_T_NORM]: `Drastick Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+  molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+  numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+  optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+  obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+  nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
+  tenetur error, harum nesciunt ipsum debitis quas aliquid.`,
+}
 
 function App() {
   const [size, setSize] = useState(3)
@@ -108,6 +131,9 @@ function App() {
         <option value={METHOD_OF_CALCULATION.LUKASIEWICZ_T_NORM}>Lukasiewiczova</option>
         <option value={METHOD_OF_CALCULATION.DRASTICKY_T_NORM}>Drasticky soucin </option>
         </select>
+        <p className="method-of-calculation-tip-text">
+          {TIP_TEXT[methodOfCalculation]}
+        </p>
       </div>
 
       <div>
