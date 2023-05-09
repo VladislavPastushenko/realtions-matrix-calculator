@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Matrix from "./components/Matrix";
 import calculateMatrix from "./utils/CalculateMatrix";
+import PaginationMatrix from "./components/PaginationMatrix";
 
 const SIZE_OPTIONS = [2, 3, 4, 5, 6]
 
@@ -118,14 +119,8 @@ function App() {
         <h2> Kalkulace </h2>
 
         <p>Kroky:</p>
-        <div className="steps-container">
-          {stepsValues.map((stepMatrix, idx) => (
-            <div key={"step" + idx}>
-              <div className="step-header">Krok: {idx}</div>
-              <Matrix size={size} values={stepMatrix} degree={idx} _key="step"/>
-            </div>
-          ))}
-        </div>
+        <PaginationMatrix data={[...stepsValues, ...stepsValues, ...stepsValues, ...stepsValues, ...stepsValues, ...stepsValues, ...stepsValues, ...stepsValues, ...stepsValues, ...stepsValues]} size={size}/>
+
         <p>Výsledek:</p>
         <div>
           <Matrix size={size} values={resultValues} _key="results"/>

@@ -21,3 +21,21 @@ th, td {
   border-bottom: 2px solid white;
   border-left: 2px solid white;
 }
+
+button {
+  background-color: #eee;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  padding: 4px 12px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #ddd;
+}
+
+select {
+  background-color: #eee;
+  padding: 2px 4px;
+  border-radius: 5px;
+}

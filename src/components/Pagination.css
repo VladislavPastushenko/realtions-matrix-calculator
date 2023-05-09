@@ -1,0 +1,11 @@
+.pagination-buttons-container {
+    /* text-align: center; */
+}
+
+.pagination-button {
+    margin-right: .5em;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    font-weight: 600;
+    padding-top: 8px !important;
+}
