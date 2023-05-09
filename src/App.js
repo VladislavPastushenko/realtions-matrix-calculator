@@ -67,9 +67,13 @@ function App() {
     setResult(resultData.result)
     setIsCalculated(true)
   }
+
   useEffect(() => {
-    console.log('resultValues', resultValues)
-  }, [resultValues])
+    setStepValues([])
+    setResultValues([])
+    setResult(false)
+    setIsCalculated(false)
+  }, [size])
 
   return (
     <div>
@@ -119,7 +123,7 @@ function App() {
         <h2> Kalkulace </h2>
 
         <p>Kroky:</p>
-        <PaginationMatrix data={[...stepsValues, ...stepsValues, ...stepsValues, ...stepsValues, ...stepsValues, ...stepsValues, ...stepsValues, ...stepsValues, ...stepsValues, ...stepsValues]} size={size}/>
+        <PaginationMatrix data={stepsValues} size={size}/>
 
         <p>Výsledek:</p>
         <div>
