@@ -15,7 +15,12 @@ function PaginationMatrix({data, size}) {
                             <div className="step-header">Krok: {step * 2 + idx} </div>
                             <Matrix size={size} values={stepMatrix} degree={step * 2 + idx} _key="step"/>
                         </div>
-                        <PaginationMatrixArrow hide={step === (Math.ceil(data.length / 2) - 1) && idx === 1}/>
+                        <PaginationMatrixArrow
+                            hide={
+                                (step === (Math.ceil(data.length / 2) - 1) && idx === 1) ||
+                                (step === (Math.ceil(data.length / 2) - 1) && data.length % 2 === 1)
+                                }
+                        />
                     </div>
                 ))}
             </div>

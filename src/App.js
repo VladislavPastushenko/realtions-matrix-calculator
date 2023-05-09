@@ -3,6 +3,7 @@ import "./App.css";
 import Matrix from "./components/Matrix";
 import calculateMatrix from "./utils/CalculateMatrix";
 import PaginationMatrix from "./components/PaginationMatrix";
+import { METHOD_OF_CALCULATION } from "./utils/CalculateMatrix";
 
 const SIZE_OPTIONS = [2, 3, 4, 5, 6]
 
@@ -12,6 +13,7 @@ function App() {
   const [valuesToCount, setValuesToCount] = useState ([[1, 0.5, 0.7],
                                                        [0.5, 0.5, 0.1],
                                                        [0.7, 0.1, 0.8]])
+  const [methodOfCalculation, setMethodOfCalculation] = useState(METHOD_OF_CALCULATION.MIN_T_NORM)
   const [stepsValues, setStepValues] = useState([])
   const [resultValues, setResultValues] = useState([])
   const [result, setResult] = useState(false)
@@ -19,6 +21,11 @@ function App() {
   const [error, setError] = useState(false)
 
   const changeSize = (newSize) => {
+    setStepValues([])
+    setResultValues([])
+    setResult(false)
+    setIsCalculated(false)
+
     newSize = parseInt(newSize)
 
     const tmp = [...valuesToCount]
@@ -60,20 +67,13 @@ function App() {
       return
     }
 
-    const resultData = calculateMatrix(valuesToCount)
+    const resultData = calculateMatrix(valuesToCount, methodOfCalculation)
 
     setStepValues(resultData.steps)
     setResultValues(resultData.resultMatrix)
     setResult(resultData.result)
     setIsCalculated(true)
   }
-
-  useEffect(() => {
-    setStepValues([])
-    setResultValues([])
-    setResult(false)
-    setIsCalculated(false)
-  }, [size])
 
   return (
     <div>
@@ -100,11 +100,13 @@ function App() {
         </label>
         <select
           className="select"
+          onChange={e => {setMethodOfCalculation(e.currentTarget.value)}}
+          value={methodOfCalculation}
         >
-        <option value="en">Minimova</option>
-        <option value="es">Soucinova</option>
-        <option value="pt">Lukasiewiczova</option>
-        <option value="pt">Drasticky soucin </option>
+        <option value={METHOD_OF_CALCULATION.MIN_T_NORM}>Minimova</option>
+        <option value={METHOD_OF_CALCULATION.MULTIPLYING_T_NORM}>Soucinova</option>
+        <option value={METHOD_OF_CALCULATION.LUKASIEWICZ_T_NORM}>Lukasiewiczova</option>
+        <option value={METHOD_OF_CALCULATION.DRASTICKY_T_NORM}>Drasticky soucin </option>
         </select>
       </div>
 

@@ -9,7 +9,7 @@
     outline: none;
     border: none;
     background: none;
-    width: 3em;
+    min-width: 3em;
     text-align: center;
     font-size: inherit;
 }
