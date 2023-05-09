@@ -4,6 +4,7 @@ import Matrix from "./components/Matrix";
 import calculateMatrix from "./utils/CalculateMatrix";
 import PaginationMatrix from "./components/PaginationMatrix";
 import { METHOD_OF_CALCULATION } from "./utils/CalculateMatrix";
+import Footer from "./components/Footer";
 
 const SIZE_OPTIONS = [2, 3, 4, 5, 6]
 const TIP_TEXT = {
@@ -39,14 +40,12 @@ function App() {
   const [methodOfCalculation, setMethodOfCalculation] = useState(METHOD_OF_CALCULATION.MIN_T_NORM)
   const [stepsValues, setStepValues] = useState([])
   const [resultValues, setResultValues] = useState([])
-  const [result, setResult] = useState(false)
   const [isCalculated, setIsCalculated] = useState(false)
   const [error, setError] = useState(false)
 
   const changeSize = (newSize) => {
     setStepValues([])
     setResultValues([])
-    setResult(false)
     setIsCalculated(false)
 
     newSize = parseInt(newSize)
@@ -93,15 +92,23 @@ function App() {
 
     setStepValues(resultData.steps)
     setResultValues(resultData.resultMatrix)
-    setResult(resultData.result)
     setIsCalculated(true)
   }
 
   return (
-    <div>
+    <div className="content-container">
       <h1>
         Tranzitivní uzávěr
       </h1>
+      <p className="description">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
+        tenetur error, harum nesciunt ipsum debitis quas aliquid.
+      </p>
       <div className="select-container">
         <label>
           Zadejte velikost relace:
@@ -154,15 +161,9 @@ function App() {
         <div>
           <Matrix size={size} values={resultValues} _key="results"/>
         </div>
-
-        <p> Tranzitivní uzávěr:
-          {result
-          ? <span style={{fontWeight: "600", color: "green"}}> Ano </span>
-          : <span style={{fontWeight: "600", color: "red"}}> Ne </span>
-          }
-        </p>
       </div>
       }
+      <Footer/>
     </div>
   );
 }

@@ -14,7 +14,7 @@ function Matrix({size, values, onChange=(() => {}), degree, _key="key"}) {
         <table>
             <thead>
                 <tr>
-                <th>R{!!degree && `^${degree}`}</th>
+                <th>R <sup> {degree} </sup> </th>
                 {ths}
                 </tr>
             </thead>

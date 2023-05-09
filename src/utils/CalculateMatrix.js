@@ -175,7 +175,7 @@ function DrastTransitiveClosure(firstStep){
  * @param {Array.Number[]} firstStep - First step matrix, for example [[0.2, 0.2], [0.2, 0.2]]
  * @param {String} method - Method of calculation
  * @param {Number} iterationsLimit - Max number of iterations
- * @param {Number} size - matrix size 
+ * @param {Number} size - matrix size
  * @returns {Object}
  */
 function calculateMatrix(firstStep, method=METHOD_OF_CALCULATION.DRASTICKY_T_NORM, iterationsLimit = 15, size) {
@@ -216,7 +216,7 @@ function calculateMatrix(firstStep, method=METHOD_OF_CALCULATION.DRASTICKY_T_NOR
                             myArray.push(rowValue);
                         }
                         mockResult.steps[1][a][b] = Math.max.apply(Math, myArray);
-                        while(myArray.length > 0) 
+                        while(myArray.length > 0)
                             myArray.pop();
                     }
                 }
