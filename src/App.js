@@ -8,35 +8,22 @@ import Footer from "./components/Footer";
 
 const SIZE_OPTIONS = [2, 3, 4, 5, 6]
 const TIP_TEXT = {
-  [METHOD_OF_CALCULATION.MIN_T_NORM]: `MIN_T_NORM Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-  molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-  numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-  optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-  obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-  nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-  tenetur error, harum nesciunt ipsum debitis quas aliquid.`,
-  [METHOD_OF_CALCULATION.MULTIPLYING_T_NORM]: `Multiplying Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-  molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-  numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-  optio, eaque rerum!`,
-  [METHOD_OF_CALCULATION.LUKASIEWICZ_T_NORM]: `Luka Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-  molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-  numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-  optio, eaque rerum! Provident similique accusantium nemo autem.`,
-  [METHOD_OF_CALCULATION.DRASTICKY_T_NORM]: `Drastick Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-  molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-  numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-  optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-  obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-  nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-  tenetur error, harum nesciunt ipsum debitis quas aliquid.`,
+  [METHOD_OF_CALCULATION.MIN_T_NORM]: `Minimová t-norma je největší traingulární norma, je definována jako minimální hodnota
+  funkce příslušnosti : T_M(x,y) = min(x,y).
+  Pro tranzitivní uzávěr fuzzy množin používáme maximovou s-normu : S_M(x,y) = max(x,y).`,
+  [METHOD_OF_CALCULATION.MULTIPLYING_T_NORM]: `Součinová t-norma T_P(x,y) je definována jako součin funkcí příslušnosti prvků x a y : T_P(x,y) = x * y.
+  Pro tranzitivní uzávěr fuzzy množin používáme s-normu : S_P(x,y) = x + y - x * y. `,
+  [METHOD_OF_CALCULATION.LUKASIEWICZ_T_NORM]: `Lukasiewiczova t-norma T_L(x,y) je definována následovně : T_L(x,y) = max(0, x + y -1).
+  Pro tranzitivní uzávěr fuzzy množin používáme s-normu : S_L(x,y) = min(1, x + y). `,
+  [METHOD_OF_CALCULATION.DRASTICKY_T_NORM]: `Drastický součin T_D(x,y) je definován následovně : T_D(x,y) = min(x, y), pokud max(x, y) = 1. Jinak T_D = 0.
+  Pro tranzitivní uzávěr fuzzy množin používáme drastický součet : S_D(x,y) = max(x, y), jestli min(x, y) = 0. Jinak S_D = 1.`,
 }
 
 function App() {
   const [size, setSize] = useState(3)
-  const [valuesToCount, setValuesToCount] = useState ([[1, 0.5, 0.7],
-                                                       [0.5, 0.5, 0.1],
-                                                       [0.7, 0.1, 0.8]])
+  const [valuesToCount, setValuesToCount] = useState ([[0, 0, 0],
+                                                       [0, 0, 0],
+                                                       [0, 0, 0]])
   const [methodOfCalculation, setMethodOfCalculation] = useState(METHOD_OF_CALCULATION.MIN_T_NORM)
   const [stepsValues, setStepValues] = useState([])
   const [resultValues, setResultValues] = useState([])
@@ -100,14 +87,14 @@ function App() {
       <h1>
         Tranzitivní uzávěr
       </h1>
-      <p className="description">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-        tenetur error, harum nesciunt ipsum debitis quas aliquid.
+      <p className="description">Doplnění netranzitivní relace do tranzitivní se provádí
+na základě operace tranzitivního uzávěru.
+T-tranzitivní uzávěr fuzzy relace R je nejmenší relace, která obsahuje R a je T-tranzitivní.
+
+Tranzitivní uzávěr dostaneme následovně:
+R<sub>T</sub><sup>+</sup> = R &cup; R<sup>2</sup> &cup; R<sup>3</sup> &cup; R<sup>4</sup> &cup; ... R<sup>n</sup>,
+kde je R<sup>2</sup> = R &bull;<sub>T</sub> R, R<sup>3</sup> = R &bull;<sub>T</sub> R &bull;<sub>T</sub> R atd. Při určování tranzitivního uzávěru se stupeň  R<sup>n</sup> počítá do doby, než je
+n nalezen takový, že R<sup>n</sup> = R<sup>n+1</sup>. Vzhledem k tomu, že při skládání relací aplikujeme nějakou t-normu,  při konstrukci R<sub>T</sub><sup>+</sup>  použijeme její duální s-normu pro určení sjednocení.
       </p>
       <div className="select-container">
         <label>
@@ -133,10 +120,10 @@ function App() {
           value={methodOfCalculation}
           title={TIP_TEXT[methodOfCalculation]}
         >
-        <option value={METHOD_OF_CALCULATION.MIN_T_NORM}>Minimova</option>
-        <option value={METHOD_OF_CALCULATION.MULTIPLYING_T_NORM}>Soucinova</option>
+        <option value={METHOD_OF_CALCULATION.MIN_T_NORM}>Minimová</option>
+        <option value={METHOD_OF_CALCULATION.MULTIPLYING_T_NORM}>Součinová</option>
         <option value={METHOD_OF_CALCULATION.LUKASIEWICZ_T_NORM}>Lukasiewiczova</option>
-        <option value={METHOD_OF_CALCULATION.DRASTICKY_T_NORM}>Drasticky soucin </option>
+        <option value={METHOD_OF_CALCULATION.DRASTICKY_T_NORM}>Drastický součin </option>
         </select>
       </div>
 
@@ -152,7 +139,7 @@ function App() {
 
       {isCalculated &&
       <div className="calculation-container">
-        <h2> Kalkulace </h2>
+        <h2> Výpočet tranzitivního uzávěru </h2>
 
         <p>Kroky:</p>
         <PaginationMatrix data={stepsValues} size={size}/>

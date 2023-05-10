@@ -4,7 +4,8 @@ function Footer() {
     return (
         <div className="footer-container">
             <p className="footer-inscription">
-                Done by Viki Kviki and Vlad
+                Viktoryia Tomason,
+                mviktoria294@gmail.com
             </p>
         </div>
     )
