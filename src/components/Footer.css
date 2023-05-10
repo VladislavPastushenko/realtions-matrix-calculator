@@ -1,0 +1,10 @@
+.footer-container {
+    display: inline-block;
+    min-width: 600px;
+    border-top: 1px solid #eee;
+    margin-top: 2em;
+}
+
+.footer-inscription {
+    color: #aaa;
+}
